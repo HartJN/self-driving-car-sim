@@ -89,7 +89,7 @@ class Sensor {
   draw(ctx) {
     for (let i = 0; i < this.rayCount; i++) {
       // draw readings -> set end as rays endpoint. if there is a reading, set end to value of the reading.
-      let end = this.ray[i][1]
+      let end = this.rays[i][1]
       if (this.readings[i]) {
         end = this.readings[i]
       }
