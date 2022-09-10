@@ -12,12 +12,56 @@ class Sensor {
 
     // store each ray
     this.rays = []
+
+    // Border collision detection
+    this.readings = []
   }
 
   update(roadBorders) {
     // creates rays
+
     this.#castRays()
+
+    // initialise readings array.
+    this.readings = []
+    // iterate through all rays and push to readings array
+    for (let i = 0; i < this.rays.length; i++) {
+      this.readings.push(this.#getReading(this.rays[i], roadBorders))
+    }
   }
+
+  // Detect where ray touches road borders
+  #getReading(ray, roadBorders) {
+    // find where ray touches border
+    let touches = []
+
+    // iterate through borders
+    for (let i = 0; i < roadBorders.length; i++) {
+      // getIntersection returns values x, y, offset. offset = distance between center of car and border.
+      const touch = getIntersection(
+        // segment 1
+        ray[0],
+        ray[1],
+        // segment 2
+        roadBorders[i][0],
+        roadBorders[i][1]
+      )
+      if (touch) {
+        touches.push(touch)
+      }
+    }
+    // if no touches happen (no reading) return null
+    if (touches.length == 0) {
+      return null
+    } else {
+      // place all offsets into one array.
+      const offsets = touches.map(e => e.offset)
+      // find minimum offset
+      const minOffset = Math.min(...offsets)
+      return touches.find(e => e.offset == minOffset)
+    }
+  }
+
   #castRays() {
     // create empty array
     this.rays = []
