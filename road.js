@@ -1,5 +1,7 @@
+// To adjust lane count, set laneCount to desired value.
+
 class Road {
-  constructor(x, width, laneCount = 3) {
+  constructor(x, width, laneCount = 4) {
     this.x = x
     this.width = width
     this.laneCount = laneCount
@@ -11,6 +13,13 @@ class Road {
     const infinity = 1000000
     this.top = -infinity
     this.bottom = infinity
+  }
+
+  // Set lane position to center
+
+  getLaneCenter(laneIndex) {
+    const laneWidth = this.width / this.laneCount
+    return this.left + laneWidth / 2 + laneIndex * laneWidth
   }
 
   // Draw Road
