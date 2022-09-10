@@ -4,7 +4,7 @@ class Sensor {
   constructor(car) {
     this.car = car
     // amount of rays
-    this.rayCount = 3
+    this.rayCount = 5
     // length of rays
     this.rayLength = 150
     // angle of the rays. 90deg
@@ -15,6 +15,9 @@ class Sensor {
   }
 
   update() {
+    this.#castRays()
+  }
+  #castRays() {
     // create empty array
     this.rays = []
     // populate rays[]
