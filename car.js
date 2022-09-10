@@ -20,10 +20,10 @@ class Car {
 
   //update location Method
 
-  update() {
+  update(roadBorders) {
     this.#move()
     // update sensor
-    this.sensor.update()
+    this.sensor.update(roadBorders)
   }
   #move() {
     if (this.controls.forward) {

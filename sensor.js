@@ -14,7 +14,8 @@ class Sensor {
     this.rays = []
   }
 
-  update() {
+  update(roadBorders) {
+    // creates rays
     this.#castRays()
   }
   #castRays() {
