@@ -11,6 +11,8 @@ class Car {
     this.maxSpeed = 3
     this.friction = 0.05
     this.angle = 0
+    // add damage
+    this.damage = false
 
     // pass car to this
     this.sensor = new Sensor(this)
@@ -23,11 +25,23 @@ class Car {
   update(roadBorders) {
     this.#move()
     this.polygon = this.#createPolygon()
+    // detect if damage is done to car
+    this.damage = this.#assessDamage(roadBorders)
     // update sensor
     this.sensor.update(roadBorders)
   }
 
+  #assessDamage(roadBorders) {
+    for (let i = 0; i < roadBorders.length; i++) {
+      if (polysIntersect(this.polygon, roadBorders[i])) {
+        return true
+      }
+    }
+    return false
+  }
+
   // Detecting corners of cars
+  // Adjust points of cars by multiplying x and y rads by x amount
   #createPolygon() {
     const points = []
     // rad = radius-> with hypotenuse method
