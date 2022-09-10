@@ -22,9 +22,41 @@ class Car {
 
   update(roadBorders) {
     this.#move()
+    this.polygon = this.#createPolygon()
     // update sensor
     this.sensor.update(roadBorders)
   }
+
+  // Detecting corners of cars
+  #createPolygon() {
+    const points = []
+    // rad = radius-> with hypotenuse method
+    const rad = Math.hypot(this.width, this.height) / 2
+    // finding angle between center of car and ray using arc tangent
+    const alpha = Math.atan2(this.width, this.height)
+    // top right corner
+    points.push({
+      x: this.x - Math.sin(this.angle - alpha) * rad,
+      y: this.y - Math.cos(this.angle - alpha) * rad,
+    })
+    // top left corners
+    points.push({
+      x: this.x - Math.sin(this.angle + alpha) * rad,
+      y: this.y - Math.cos(this.angle + alpha) * rad,
+    })
+    // bottom right corner
+    points.push({
+      x: this.x - Math.sin(Math.PI - this.angle - alpha) * rad,
+      y: this.y - Math.cos(Math.PI - this.angle - alpha) * rad,
+    })
+    // bottom left corner
+    points.push({
+      x: this.x - Math.sin(Math.PI + this.angle - alpha) * rad,
+      y: this.y - Math.cos(Math.PI + this.angle - alpha) * rad,
+    })
+    return points
+  }
+
   #move() {
     if (this.controls.forward) {
       this.speed += this.acceleration
