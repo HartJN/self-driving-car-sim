@@ -24,7 +24,13 @@ class Road {
       // find x co-ord of each vertical lane using linear interpolation.
       const x = lerp(this.left, this.right, i / this.laneCount)
 
-      // Draw line on left side
+      // Create line dashes on center lines.
+      if (i > 0 && i < this.laneCount) {
+        ctx.setLineDash([20, 20])
+      } else {
+        ctx.setLineDash([])
+      }
+      // Draw lines
       ctx.beginPath()
       ctx.moveTo(x, this.top)
       ctx.lineTo(x, this.bottom)
