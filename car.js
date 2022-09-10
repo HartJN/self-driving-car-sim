@@ -26,7 +26,7 @@ class Car {
     this.#move()
     this.polygon = this.#createPolygon()
     // detect if damage is done to car
-    this.damage = this.#assessDamage(roadBorders)
+    this.damaged = this.#assessDamage(roadBorders)
     // update sensor
     this.sensor.update(roadBorders)
   }
