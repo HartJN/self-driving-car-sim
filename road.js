@@ -19,6 +19,12 @@ class Road {
     ctx.lineWidth = 5
     ctx.strokeStyle = 'white'
 
+    // Create lanes -> value of laneCount = 3
+    for (let i = 0; i <= this.laneCount; i++) {
+      // find x co-ord of each vertical lane using linear interpolation.
+      const x = lerp(this.left, this.right, i / this.laneCount)
+    }
+
     // Draw line on left side
     ctx.beginPath()
     ctx.moveTo(this.left, this.top)
@@ -31,4 +37,11 @@ class Road {
     ctx.lineTo(this.right, this.bottom)
     ctx.stroke()
   }
+}
+
+// When t = 0 ->  value = A
+// When t = 1 -> value = B
+// if A, t, B -> difference = half of difference.
+function lerp(A, B, t) {
+  return A + (B - A) * t
 }
