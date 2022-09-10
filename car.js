@@ -12,6 +12,7 @@ class Car {
     this.friction = 0.05
     this.angle = 0
 
+    // pass car to this
     this.sensor = new Sensor(this)
 
     this.controls = new Controls()
@@ -21,6 +22,7 @@ class Car {
 
   update() {
     this.#move()
+    // update sensor
     this.sensor.update()
   }
   #move() {
@@ -72,6 +74,7 @@ class Car {
     ctx.fill()
     ctx.restore()
 
+    // draw sensor
     this.sensor.draw(ctx)
   }
 }
