@@ -88,11 +88,26 @@ class Sensor {
   }
   draw(ctx) {
     for (let i = 0; i < this.rayCount; i++) {
+      // draw readings -> set end as rays endpoint. if there is a reading, set end to value of the reading.
+      let end = this.ray[i][1]
+      if (this.readings[i]) {
+        end = this.readings[i]
+      }
+
       ctx.beginPath()
       ctx.lineWidth = 2
       ctx.strokeStyle = 'yellow'
       ctx.moveTo(this.rays[i][0].x, this.rays[i][0].y)
-      ctx.lineTo(this.rays[i][1].x, this.rays[i][1].y)
+      // draw line to where reading occurs
+      ctx.lineTo(end.x, end.y)
+      ctx.stroke()
+
+      // carry on line past reading detection
+      ctx.beginPath()
+      ctx.lineWidth = 2
+      ctx.strokeStyle = 'black'
+      ctx.moveTo(this.rays[i][1].x, this.rays[i][1].y)
+      ctx.lineTo(end.x, end.y)
       ctx.stroke()
     }
   }
