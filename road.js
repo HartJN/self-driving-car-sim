@@ -13,6 +13,18 @@ class Road {
     const infinity = 1000000
     this.top = -infinity
     this.bottom = infinity
+
+    // Create lane border collision
+    const topLeft = { x: this.left, y: this.top }
+    const topRight = { x: this.right, y: this.top }
+    const bottomLeft = { x: this.left, y: this.bottom }
+    const bottomRight = { x: this.right, y: this.bottom }
+
+    this.borders = [
+      // segment array. Use of arrays to allow for future features - curved roads ect.
+      [topLeft, bottomLeft],
+      [topRight, bottomRight],
+    ]
   }
 
   // Set lane position to center
