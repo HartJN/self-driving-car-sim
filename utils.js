@@ -24,3 +24,22 @@ function getIntersection(A, B, C, D) {
 
   return null
 }
+
+function polysIntersect(poly1, poly2) {
+  for (let i = 0; i < poly1.length; i++) {
+    for (let j = 0; j < poly2.length; j++) {
+      // touch makes segments of one point of polygon to the other
+      // taking modulus poly.length, prevents errors in adding + 1 to array. Allows last point in polygon to attach to first point. Compares every segment from first polygon and compares it to every segment of second polygon. If there is a touch, returns true, if not returns false.
+      const touch = getIntersection(
+        poly1[i],
+        poly1[(i + 1) % poly1.length],
+        poly2[j],
+        poly2[(j + 1) % poly2.length]
+      )
+      if (touch) {
+        return true
+      }
+    }
+  }
+  return false
+}
