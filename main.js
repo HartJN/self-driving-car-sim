@@ -38,5 +38,7 @@ function animate() {
   car.draw(carCtx, 'blue')
 
   carCtx.restore()
+
+  Visualiser.drawNetwork(networkCtx, car.brain)
   requestAnimationFrame(animate)
 }
