@@ -44,15 +44,18 @@ function animate(time) {
   carCtx.save()
   // creates camera effect. "Road moves instead of car"
   carCtx.translate(0, -cars[0].y + carCanvas.height * 0.7)
-  road.draw(carCtx)
 
+  road.draw(carCtx)
   // draw traffic cars
   for (let i = 0; i < traffic.length; i++) {
     traffic[i].draw(carCtx, 'red')
   }
+  carCtx.globalAlpha = 0.2
   for (let i = 0; i < cars.length; i++) {
     cars[i].draw(carCtx, 'blue')
   }
+  carCtx.globalAlpha = 1
+  cars[0].draw(carCtx, 'blue', true)
 
   carCtx.restore()
 
