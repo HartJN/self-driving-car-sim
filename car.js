@@ -44,6 +44,13 @@ class Car {
 
       const outputs = NeuralNetwork.feedForward(offsets, this.brain)
       // console.log(outputs)
+
+      if (this.useBrain) {
+        this.controls.forward = outputs[0]
+        this.controls.left = outputs[1]
+        this.controls.right = outputs[2]
+        this.controls.reverse = outputs[3]
+      }
     }
   }
 
