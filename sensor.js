@@ -17,7 +17,7 @@ class Sensor {
     this.readings = []
   }
 
-  update(roadBorders) {
+  update(roadBorders, traffic) {
     // creates rays
 
     this.#castRays()
@@ -26,12 +26,12 @@ class Sensor {
     this.readings = []
     // iterate through all rays and push to readings array
     for (let i = 0; i < this.rays.length; i++) {
-      this.readings.push(this.#getReading(this.rays[i], roadBorders))
+      this.readings.push(this.#getReading(this.rays[i], roadBorders, traffic))
     }
   }
 
   // Detect where ray touches road borders
-  #getReading(ray, roadBorders) {
+  #getReading(ray, roadBorders, traffic) {
     // find where ray touches border
     let touches = []
 
