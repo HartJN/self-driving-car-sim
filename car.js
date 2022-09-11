@@ -14,8 +14,10 @@ class Car {
     // add damage
     this.damage = false
 
-    // pass car to this
-    this.sensor = new Sensor(this)
+    if (controlType != 'DUMMY') {
+      // pass car to this
+      this.sensor = new Sensor(this)
+    }
 
     this.controls = new Controls(controlType)
   }
@@ -31,7 +33,9 @@ class Car {
       this.damaged = this.#assessDamage(roadBorders)
       // update sensor
     }
-    this.sensor.update(roadBorders)
+    if (this.sensor) {
+      this.sensor.update(roadBorders)
+    }
   }
 
   #assessDamage(roadBorders) {
@@ -127,7 +131,9 @@ class Car {
     }
     ctx.fill()
 
-    // draw sensor
-    this.sensor.draw(ctx)
+    if (this.sensor) {
+      // draw sensor
+      this.sensor.draw(ctx)
+    }
   }
 }
