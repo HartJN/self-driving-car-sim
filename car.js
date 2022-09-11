@@ -14,6 +14,8 @@ class Car {
     // add damage
     this.damage = false
 
+    this.useBrain = controlType == 'AI'
+
     if (controlType != 'DUMMY') {
       // pass car to this
       this.sensor = new Sensor(this)
@@ -41,7 +43,7 @@ class Car {
       )
 
       const outputs = NeuralNetwork.feedForward(offsets, this.brain)
-      console.log(outputs)
+      // console.log(outputs)
     }
   }
 
