@@ -23,11 +23,14 @@ class Car {
   //update location Method
 
   update(roadBorders) {
-    this.#move()
-    this.polygon = this.#createPolygon()
-    // detect if damage is done to car
-    this.damaged = this.#assessDamage(roadBorders)
-    // update sensor
+    // Do not allow car to move if damaged
+    if (!this.damaged) {
+      this.#move()
+      this.polygon = this.#createPolygon()
+      // detect if damage is done to car
+      this.damaged = this.#assessDamage(roadBorders)
+      // update sensor
+    }
     this.sensor.update(roadBorders)
   }
 
