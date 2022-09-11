@@ -7,10 +7,10 @@ class NeuralNetwork {
     }
   }
 
-  static feetForward(givenInputs, network) {
-    let outputs = Level.feetForward(givenInputs, network.levels[0])
+  static feedForward(givenInputs, network) {
+    let outputs = Level.feedForward(givenInputs, network.levels[0])
     for (let i = 1; i < network.levels.length; i++) {
-      outputs = Level.feetForward(outputs, network.levels[i])
+      outputs = Level.feedForward(outputs, network.levels[i])
     }
     return outputs
   }
@@ -36,7 +36,7 @@ class Level {
   }
 
   static #randomise(level) {
-    for (let i = 0; i < level.inputs; i++) {
+    for (let i = 0; i < level.inputs.length; i++) {
       for (let j = 0; j < level.outputs.length; j++) {
         level.weights[i][j] = Math.random() * 2 - 1
       }
@@ -45,18 +45,18 @@ class Level {
       level.biases[i] = Math.random() * 2 - 1
     }
   }
-  // computer output values using feet forward algorithm
+  // computer output values using feed forward algorithm
 
-  static feetForward(givenInputs, level) {
+  static feedForward(givenInputs, level) {
     // goes through all level inputs and sets the to inputs from sensor
-    for (let i = 0; level.inputs.length; i++) {
+    for (let i = 0; i < level.inputs.length; i++) {
       level.inputs[i] = givenInputs[i]
     }
     // loop through every output
     for (let i = 0; i < level.outputs.length; i++) {
       // calc sum between values of input and weights
       let sum = 0
-      for (let j = 0; level.inputs.length; j++) {
+      for (let j = 0; j < level.inputs.length; j++) {
         sum += level.inputs[j] * level.weights[j][i]
       }
       if (sum > level.biases[i]) {
