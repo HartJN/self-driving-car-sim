@@ -52,5 +52,6 @@ To create a 'self-driving car' simulation, using machine learning and neural net
 - Change car graphic
 - Add random events to avoid.
 - Traffic lights
+- Remove comments and make code self-reading
 
 # How it works: Coming soon.
