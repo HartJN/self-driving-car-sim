@@ -30,12 +30,11 @@ class Sensor {
     }
   }
 
-  // Detect where ray touches road borders
   #getReading(ray, roadBorders, traffic) {
     // find where ray touches border
     let touches = []
 
-    // iterate through borders
+    // Detect where ray touches road borders
     for (let i = 0; i < roadBorders.length; i++) {
       // getIntersection returns values x, y, offset. offset = distance between center of car and border.
       const touch = getIntersection(
@@ -50,6 +49,23 @@ class Sensor {
         touches.push(touch)
       }
     }
+
+    // Detects if rays are intersecting traffic
+    for (let i = 0; i < traffic.length; i++) {
+      const poly = traffic[i].polygon
+      for (let j = 0; j < poly.length; j++) {
+        const value = getIntersection(
+          ray[0],
+          ray[1],
+          poly[j],
+          poly[(j + 1) % poly.length]
+        )
+        if (value) {
+          touches.push(value)
+        }
+      }
+    }
+
     // if no touches happen (no reading) return null
     if (touches.length == 0) {
       return null
